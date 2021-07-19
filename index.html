@@ -4,9 +4,8 @@
       <!-- <script src="https://d3js.org/d3.v7.min.js"></script> -->
       <script src="https://d3js.org/d3.v4.js"></script>
    </head>
-
    <body onload = 'init()'>
-      <div id="my_dataviz"></div>
+      <div id="my_dataviz" style="background-image: url('./Images/blue-clouds.jpeg');"></div>
       
       <script>
 
@@ -118,7 +117,7 @@
                 .datum(arrOilEmission)
                 .attr("fill", "none")
                 .attr("stroke", "steelblue")
-                .attr("stroke-width", 1.5)
+                .attr("stroke-width", 2.5)
                 .attr("d", d3.line()
                 .x(function(d) { return x(d.date) })
                 .y(function(d) { return y(d.value) })
@@ -128,7 +127,7 @@
                 .datum(arrCoalEmission)
                 .attr("fill", "none")
                 .attr("stroke", "red")
-                .attr("stroke-width", 1.5)
+                .attr("stroke-width", 2.5)
                 .attr("d", d3.line()
                 .x(function(d) { return x(d.date) })
                 .y(function(d) { return y(d.value) })
@@ -139,7 +138,7 @@
                 .datum(arrCementEmission)
                 .attr("fill", "none")
                 .attr("stroke", "purple")
-                .attr("stroke-width", 1.5)
+                .attr("stroke-width", 2.5)
                 .attr("d", d3.line()
                 .x(function(d) { return x(d.date) })
                 .y(function(d) { return y(d.value) })
@@ -150,7 +149,7 @@
                 .datum(arrFlarEmission)
                 .attr("fill", "none")
                 .attr("stroke", "olive")
-                .attr("stroke-width", 1.5)
+                .attr("stroke-width", 2.5)
                 .attr("d", d3.line()
                 .x(function(d) { return x(d.date) })
                 .y(function(d) { return y(d.value) })
@@ -170,7 +169,7 @@
                 .datum(arrOtherEmission)
                 .attr("fill", "none")
                 .attr("stroke", "magenta")
-                .attr("stroke-width", 1.5)
+                .attr("stroke-width", 2.5)
                 .attr("d", d3.line()
                 .x(function(d) { return x(d.date) })
                 .y(function(d) { return y(d.value) })
