@@ -20,6 +20,7 @@
   </svg>
 </div>
 
+<!-- this is a test -->
 <script>
 function HiglightPoint(){
 
