@@ -9,36 +9,44 @@
       </style>      
    </head>
    <body onload = 'init()'>
-      <div id="my_dataviz">
-      </br>
-      <button id = "redbutton" class="w3-button w3-white w3-border w3-border-red w3-round-large" onclick = "showhide(this)">Coal</button>
-      <button class="w3-button w3-white w3-border w3-border-green w3-round-large">Oil</button>
-      <button class="w3-button w3-white w3-border w3-border-olive w3-round-large">Flaring</button>
-      <button class="w3-button w3-white w3-border w3-border-purple w3-round-large">Gas</button>
-      <button class="w3-button w3-white w3-border w3-border-pink w3-round-large">Cement</button>
-      <button class="w3-button w3-white w3-border w3-border-yellow w3-round-large">Other</button>
+      <div id = "my_title">What Causes Air Pollution?</div>
+      <div id = "my_title">Air pollution is the release of gases and small fragments of human-made particles and chemicals into the air, 
+         the concentration of which is harmful to all living and breathing creatures on this planet.
+         Upon studying global warming, researchers have determined that air pollution is a significant contributor to this problem. 
+         The opaqueness of air-polluting particles in the atmosphere traps the sun rays in and prevents the Earth from cooling off naturally. 
+         At the same time, other air pollutants are destroying the outer atmospheric layer, 
+         primarily the ozone layer (which prevents too much sunlight from entering). 
+         Major changes in weather patterns have been recorded around the world, from unexpected monsoons to expanding deserts, 
+         caused by primary and secondary air pollutants contributing to climate change</div>
+      <div id = "my_buttons">
+         <button id = "coalbutton" class="w3-button w3-white w3-border w3-border-red w3-round-large" onclick = "showhide(this)">Coal</button>
+         <button id = "oilbutton" class="w3-button w3-white w3-border w3-border-green w3-round-large" onclick = "showhide(this)">Oil</button>
+         <button id = "flarbutton" class="w3-button w3-white w3-border w3-border-olive w3-round-large" onclick = "showhide(this)">Flaring</button>
+         <button id = "gasbutton" class="w3-button w3-white w3-border w3-border-purple w3-round-large" onclick = "showhide(this)">Gas</button>
+         <button id = "cementbutton" class="w3-button w3-white w3-border w3-border-pink w3-round-large" onclick = "showhide(this)">Cement</button>
+         <button id = "otherbutton" class="w3-button w3-white w3-border w3-border-yellow w3-round-large" onclick = "showhide(this)">Other</button>
+      </div>
+      <div id="my_dataviz" style="border:solid 2px gray;">
+      <!--<div id="my_dataviz" style="background-image: url('./Images/Air-pollution.jpg');"></div>-->
       </div>
       
       <script>
          function showhide(t)
          {
-            if(t.id == "redbutton")
+            var buttonID = t.id;
+            var lineID = '#' + buttonID.replace('button', 'line');
+            var opacity = d3.select(lineID).style("opacity");
+
+            if(opacity == 0)
             {
-               var opacity = d3.select('#redline').style("opacity");
-
-               alert(opacity);
-               if(opacity == 0)
-               {
-                  d3.select("#redline")
+                  d3.select(lineID)
                   .style("opacity", 1);
-               }
-               else
-               {
-                  d3.select("#redline")
-                  .style("opacity", 0);
-               }
             }
-
+            else
+            {
+                  d3.select(lineID)
+                  .style("opacity", 0);
+            }
          }
 
       // set the dimensions and margins of the graph
@@ -164,7 +172,7 @@
             
 
                svg.append("path")
-               .attr('id','pinkline')
+               .attr('id','oilline')
                 .datum(arrOilEmission)
                 .attr("fill", "none")
                 .attr("stroke", "pink")
@@ -175,7 +183,7 @@
                 )  
 
                 svg.append("path")
-                .attr('id','redline')
+                .attr('id','coalline')
                 .datum(arrCoalEmission)
                 .attr("fill", "none")
                 .attr("stroke", "red")
@@ -187,7 +195,7 @@
 
 
                 svg.append("path")
-                .attr('id','purpleline')
+                .attr('id','cementline')
                 .datum(arrCementEmission)
                 .attr("fill", "none")
                 .attr("stroke", "purple")
@@ -199,7 +207,7 @@
 
 
                 svg.append("path")
-                .attr('id','oliveline')
+                .attr('id','flarline')
                 .datum(arrFlarEmission)
                 .attr("fill", "none")
                 .attr("stroke", "olive")
@@ -210,7 +218,7 @@
                 )  
 
                 svg.append("path")
-                .attr('id','greenline')
+                .attr('id','gasline')
                 .datum(arrGasEmission)
                 .attr("fill", "none")
                 .attr("stroke", "green")
@@ -221,7 +229,7 @@
                 )  
 
                 svg.append("path")
-                .attr('id','magentaline')
+                .attr('id','otherline')
                 .datum(arrOtherEmission)
                 .attr("fill", "none")
                 .attr("stroke", "magenta")
