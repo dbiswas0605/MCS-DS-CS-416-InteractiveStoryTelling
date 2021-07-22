@@ -3,13 +3,14 @@
    <head>
       <!-- <script src="https://d3js.org/d3.v7.min.js"></script> -->
       <script src="https://d3js.org/d3.v4.js"></script>
+      <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
       <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
       <style>
       .w3-btn {margin-bottom:10px;}
       </style>      
    </head>
    <body onload = 'init()'>
-      <div id = "my_title">What Causes Air Pollution?</div>
+      <div id = "my_title1">What Causes Air Pollution?</div>
       <div id = "my_title">Air pollution is the release of gases and small fragments of human-made particles and chemicals into the air, 
          the concentration of which is harmful to all living and breathing creatures on this planet.
          Upon studying global warming, researchers have determined that air pollution is a significant contributor to this problem. 
@@ -49,6 +50,27 @@
             }
          }
 
+         var mouseover = function(d) {
+         Tooltip
+            .style("opacity", 1)
+         d3.select(this)
+            .style("stroke", "black")
+            .style("opacity", 1)
+      }
+      var mousemove = function(d) {
+         Tooltip
+            .html("The exact value of<br>this cell is: ")
+            .style("left", 100)
+            .style("top", -100)
+      }
+      var mouseleave = function(d) {
+         Tooltip
+            .style("opacity", 0)
+         d3.select(this)
+            .style("stroke", "none")
+            .style("opacity", 0.8)
+      }
+
       // set the dimensions and margins of the graph
       var margin = {top: 50, right: 30, bottom: 30, left: 100},
       width = 1200 - margin.left - margin.right,
@@ -64,31 +86,119 @@
       .attr("transform",
          "translate(" + margin.left + "," + margin.top + ")");
 
-
-
          svg.append("circle")
          .attr('id','my_cirOil')
-         .attr('cx',50)
-         .attr('cy',50)
+         .attr('cx',40)
+         .attr('cy',20)
          .attr('r',10)
          .style('fill','pink')
          .style('stroke-width','1');
 
          svg.append("circle")
          .attr('id','my_cirCoal')
-         .attr('cx',50)
-         .attr('cy',60)
+         .attr('cx',40)
+         .attr('cy',20)
          .attr('r',10)
          .style('fill','red')
-         .style('stroke-width','1');       
+         .style('stroke-width','1')
+         .on("mouseover", mouseover)
+         .on("mousemove", mousemove)
+         .on("mouseleave", mouseleave);       
          
          svg.append("circle")
          .attr('id','my_cirCement')
-         .attr('cx',50)
-         .attr('cy',70)
+         .attr('cx',40)
+         .attr('cy',20)
          .attr('r',10)
          .style('fill','purple')
-         .style('stroke-width','1');            
+         .style('stroke-width','1');         
+         
+         svg.append("circle")
+         .attr('id','my_cirFlar')
+         .attr('cx',40)
+         .attr('cy',20)
+         .attr('r',10)
+         .style('fill','olive')
+         .style('stroke-width','1');  
+
+         svg.append("circle")
+         .attr('id','my_cirGas')
+         .attr('cx',40)
+         .attr('cy',20)
+         .attr('r',10)
+         .style('fill','green')
+         .style('stroke-width','1');  
+
+         svg.append("circle")
+         .attr('id','my_cirOther')
+         .attr('cx',40)
+         .attr('cy',20)
+         .attr('r',10)
+         .style('fill','magrnta')
+         .style('stroke-width','1');  
+
+/*
+         var bar = svg.append("g")
+         .attr('id','g4rect')
+         .attr("transform", "translate(60,40)");
+
+         bar.append("div")
+            //.attr("class","key_id")
+            .attr("id","div_customContent")
+*/
+         // create a tooltip
+         var Tooltip = d3.select("body")
+            .append("div")
+            .style("opacity", 1)
+            .attr("class", "tooltip")
+            .style("background-color", "white")
+            .style("border", "solid")
+            .style("border-width", "2px")
+            .style("border-radius", "5px")
+            .style("padding", "5px")
+            .html("The exact value of<br>this cell is: ")
+
+
+
+  // Three function that change the tooltip when user hover / move / leave a cell
+
+
+
+
+
+/*
+         bar.append("rect")
+            .attr('x',80)
+            .attr('y',60)
+            .attr("width", 20)
+            .attr("height", 40)
+            .style('fill','gray')
+            .style('stroke','gray')
+            .style('stroke-width','1') 
+
+         bar.append("text")
+            .attr("x", 30)
+            .attr("y", 40 / 2)
+            .attr("dy", ".35em")
+            .text("hello");
+
+         svg.append("rect")
+         .html(" <textArea font-family=Verdana font-size=20 fill=blue > Test " + "</br>" + "Test2 </textArea>")
+         .attr('id','my_rectOil')
+         .attr('x',40)
+         .attr('y',20)
+         .attr('width',50)
+         .attr('height',40)
+         .style('fill','gray')
+         .style('stroke','gray')
+         .style('stroke-width','1') 
+
+         svg.append("text")
+         .text("This text is changed")
+         .attr('x',40)
+         .attr('y',30)
+*/
+
 
          //let arrYears = new Array ();
 
@@ -141,12 +251,24 @@
 
                      var dtCoal = { date : d3.timeParse("%Y")(consdata.Year), value : consdata['CO2 emissions from coal'] };
                      arrCoalEmission.push(dtCoal);
+                     if(CoalEmissionStart.value == 0 && dtCoal.value >0)
+                     {
+                        CoalEmissionStart = dtCoal;
+                     }
 
                      var dtGas = { date : d3.timeParse("%Y")(consdata.Year), value : consdata['CO2 emissions from gas'] };
                      arrGasEmission.push(dtGas);
+                     if(GasEmissionStart.value == 0 && dtGas.value >0)
+                     {
+                        GasEmissionStart = dtGas;
+                     }                     
                      
                      var dtOther = { date : d3.timeParse("%Y")(consdata.Year), value : consdata['CO2 emissions from other industry'] };
-                     arrOtherEmission.push(dtOther);                     
+                     arrOtherEmission.push(dtOther);    
+                     if(OtherEmissionStart.value == 0 && dtOther.value >0)
+                     {
+                        OtherEmissionStart = dtOther;
+                     }     
 
                      return { date : d3.timeParse("%Y")(consdata.Year), value : consdata['CO2 emissions from oil'] }
                   } 
@@ -213,7 +335,7 @@
                 .attr("stroke", "olive")
                 .attr("stroke-width", 2.5)
                 .attr("d", d3.line()
-                .x(function(d) { return x(d.date) })
+                .x(function(d) { if(FlasEmissionStart.date == d.date) d3.select('#my_cirFlar').transition().duration(2000).attr('cx', x(d.date)).attr('cy', height - y(d.value)); return x(d.date) })
                 .y(function(d) { return y(d.value) })
                 )  
 
@@ -224,7 +346,7 @@
                 .attr("stroke", "green")
                 .attr("stroke-width", 1.5)
                 .attr("d", d3.line()
-                .x(function(d) { return x(d.date) })
+                .x(function(d) { if(GasEmissionStart.date == d.date) d3.select('#my_cirGas').transition().duration(2000).attr('cx', x(d.date)).attr('cy', height - y(d.value)); return x(d.date) })
                 .y(function(d) { return y(d.value) })
                 )  
 
@@ -235,7 +357,7 @@
                 .attr("stroke", "magenta")
                 .attr("stroke-width", 2.5)
                 .attr("d", d3.line()
-                .x(function(d) { return x(d.date) })
+                .x(function(d) { if(OtherEmissionStart.date == d.date) d3.select('#my_cirOther').transition().duration(2000).attr('cx', x(d.date)).attr('cy', height - y(d.value)); return x(d.date) })
                 .y(function(d) { return y(d.value) })
                 )  
                });
