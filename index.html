@@ -4,9 +4,26 @@
       <!-- <script src="https://d3js.org/d3.v7.min.js"></script> -->
       <script src="https://d3js.org/d3.v4.js"></script>
       <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+      <script src = "./JavaScripts/Annotation.js"></script>
+      <script src = "./JavaScripts/ShowHideLine.js"></script>
+
+
+
+
+
+
       <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
       <style>
       .w3-btn {margin-bottom:10px;}
+      
+      #inner{
+      width: 50%;
+      height: 50%;
+      top: 100;
+      margin: 1 auto;
+      position: relative;
+      background:orange;
+    }
       </style>      
    </head>
    <body onload = 'init()'>
@@ -32,45 +49,6 @@
       </div>
       
       <script>
-         function showhide(t)
-         {
-            var buttonID = t.id;
-            var lineID = '#' + buttonID.replace('button', 'line');
-            var opacity = d3.select(lineID).style("opacity");
-
-            if(opacity == 0)
-            {
-                  d3.select(lineID)
-                  .style("opacity", 1);
-            }
-            else
-            {
-                  d3.select(lineID)
-                  .style("opacity", 0);
-            }
-         }
-
-         var mouseover = function(d) {
-         Tooltip
-            .style("opacity", 1)
-         d3.select(this)
-            .style("stroke", "black")
-            .style("opacity", 1)
-      }
-      var mousemove = function(d) {
-         Tooltip
-            .html("The exact value of<br>this cell is: ")
-            .style("left", 100)
-            .style("top", -100)
-      }
-      var mouseleave = function(d) {
-         Tooltip
-            .style("opacity", 0)
-         d3.select(this)
-            .style("stroke", "none")
-            .style("opacity", 0.8)
-      }
-
       // set the dimensions and margins of the graph
       var margin = {top: 50, right: 30, bottom: 30, left: 100},
       width = 1200 - margin.left - margin.right,
@@ -100,10 +78,7 @@
          .attr('cy',20)
          .attr('r',10)
          .style('fill','red')
-         .style('stroke-width','1')
-         .on("mouseover", mouseover)
-         .on("mousemove", mousemove)
-         .on("mouseleave", mouseleave);       
+         .style('stroke-width','1');       
          
          svg.append("circle")
          .attr('id','my_cirCement')
@@ -137,33 +112,8 @@
          .style('fill','magrnta')
          .style('stroke-width','1');  
 
-/*
-         var bar = svg.append("g")
-         .attr('id','g4rect')
-         .attr("transform", "translate(60,40)");
 
-         bar.append("div")
-            //.attr("class","key_id")
-            .attr("id","div_customContent")
-*/
-         // create a tooltip
-         var Tooltip = d3.select("body")
-            .append("div")
-            .style("opacity", 1)
-            .attr("class", "tooltip")
-            .style("background-color", "white")
-            .style("border", "solid")
-            .style("border-width", "2px")
-            .style("border-radius", "5px")
-            .style("padding", "5px")
-            .html("The exact value of<br>this cell is: ")
-
-
-
-  // Three function that change the tooltip when user hover / move / leave a cell
-
-
-
+         
 
 
 /*
@@ -362,6 +312,10 @@
                 )  
                });
          }
+
+
+         DrawCoalToopTip(10,10);
+
       </script>
 
 
