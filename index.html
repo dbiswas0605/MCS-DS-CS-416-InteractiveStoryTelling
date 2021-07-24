@@ -8,7 +8,7 @@
       <script src = "./JavaScripts/ShowHideLine.js"></script>
 
 
-      <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+      <link rel="stylesheet" href="./CSS/button.css">
       <style>
       .w3-btn {margin-bottom:10px;}
       
@@ -33,12 +33,12 @@
          Major changes in weather patterns have been recorded around the world, from unexpected monsoons to expanding deserts, 
          caused by primary and secondary air pollutants contributing to climate change</div>
       <div id = "my_buttons">
-         <button id = "coalbutton" class="w3-button w3-white w3-border w3-border-red w3-round-large" onclick = "showhide(this)">Coal</button>
-         <button id = "oilbutton" class="w3-button w3-white w3-border w3-border-green w3-round-large" onclick = "showhide(this)">Oil</button>
-         <button id = "flarbutton" class="w3-button w3-white w3-border w3-border-olive w3-round-large" onclick = "showhide(this)">Flaring</button>
-         <button id = "gasbutton" class="w3-button w3-white w3-border w3-border-purple w3-round-large" onclick = "showhide(this)">Gas</button>
-         <button id = "cementbutton" class="w3-button w3-white w3-border w3-border-pink w3-round-large" onclick = "showhide(this)">Cement</button>
-         <button id = "otherbutton" class="w3-button w3-white w3-border w3-border-yellow w3-round-large" onclick = "showhide(this)">Other</button>
+         <button id = "coalbutton" class="w3-button w3-red w3-border w3-border-red w3-round-large" onclick = "showhide(this)">Coal</button>
+         <button id = "oilbutton" class="w3-button w3-pink w3-border w3-border-pink w3-round-large" onclick = "showhide(this)">Oil</button>
+         <button id = "flarbutton" class="w3-button w3-olive w3-border w3-border-olive w3-round-large" onclick = "showhide(this)">Flaring</button>
+         <button id = "gasbutton" class="w3-button w3-green w3-border w3-border-green w3-round-large" onclick = "showhide(this)">Gas</button>
+         <button id = "cementbutton" class="w3-button w3-purple w3-border w3-border-purple w3-round-large" onclick = "showhide(this)">Cement</button>
+         <button id = "otherbutton" class="w3-button w3-magenta w3-border w3-border-magenta w3-round-large" onclick = "showhide(this)">Other</button>
       </div>
       <div id="my_dataviz" style="border:solid 2px gray;">
       <!--<div id="my_dataviz" style="background-image: url('./Images/Air-pollution.jpg');"></div>-->
@@ -105,45 +105,8 @@
          .attr('cx',40)
          .attr('cy',20)
          .attr('r',10)
-         .style('fill','magrnta')
+         .style('fill','magenta')
          .style('stroke-width','1');  
-
-
-         
-
-
-/*
-         bar.append("rect")
-            .attr('x',80)
-            .attr('y',60)
-            .attr("width", 20)
-            .attr("height", 40)
-            .style('fill','gray')
-            .style('stroke','gray')
-            .style('stroke-width','1') 
-
-         bar.append("text")
-            .attr("x", 30)
-            .attr("y", 40 / 2)
-            .attr("dy", ".35em")
-            .text("hello");
-
-         svg.append("rect")
-         .html(" <textArea font-family=Verdana font-size=20 fill=blue > Test " + "</br>" + "Test2 </textArea>")
-         .attr('id','my_rectOil')
-         .attr('x',40)
-         .attr('y',20)
-         .attr('width',50)
-         .attr('height',40)
-         .style('fill','gray')
-         .style('stroke','gray')
-         .style('stroke-width','1') 
-
-         svg.append("text")
-         .text("This text is changed")
-         .attr('x',40)
-         .attr('y',30)
-*/
 
 
          //let arrYears = new Array ();
@@ -290,7 +253,7 @@
                 .datum(arrGasEmission)
                 .attr("fill", "none")
                 .attr("stroke", "green")
-                .attr("stroke-width", 1.5)
+                .attr("stroke-width", 2.5)
                 .attr("d", d3.line()
                 .x(function(d) { if(GasEmissionStart.date == d.date) d3.select('#my_cirGas').transition().duration(2000).attr('cx', x(d.date)).attr('cy', height - y(d.value)); return x(d.date) })
                 .y(function(d) { return y(d.value) })
@@ -310,8 +273,12 @@
          }
 
 
-         DrawCoalToopTip(10,10);
-
+         DrawCoalToolTip(10, 10);
+         DrawOilToolTip(150, 10);
+         DrawGasToolTip(230, 60);
+         CemetentToolTip(300, 10);
+         FlareToolTip(360, 60);
+         OtherToolTip(400, 10);
       </script>
 
 
