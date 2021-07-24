@@ -1,24 +1,47 @@
 function DrawCoalToopTip(x,y)
 {
-    d3.select("g")
+    var tooltipCoal = d3.select('g')
     .append("g").attr('id','tooltipCoal')
-    .attr("transform","translate(" + x + "," + y + ")")
-    .append("rect")
-    .attr("id","coaltooltip")
-    .attr("x", x)
-    .attr("y", y)
-    .attr('width',30)
-    .attr("height",50)
-    .style("fill", "grey")
+    .attr("transform","translate(" + x + "," + y + ")");
+
+    var leftTooltipBox = x;
+    var topTooltipBox = y;
+
+
+    tooltipCoal.append("rect")
+    .attr("id","coaltooltipRect")
+    .attr("x", leftTooltipBox)
+    .attr("y", topTooltipBox)
+    .attr('width',120)
+    .attr("height",80)
+    .style("fill", "red")
     .attr('opacity','0.5');
 
+    tooltipCoal.append('text')
+    .attr('id','coalText')
+    .style('font-size' , '10')
+    .attr('x',leftTooltipBox)
+    .attr('y','30')
+    .append('tspan')
+    .text("The coal has been")
 
-    d3.select('#tooltipCoal')
-    .append("text")
-    .attr("dx", 20)
-    .attr("dy", 25)
-    .text("The coal has been a primary source or fuel since 1750. \
-    Its still used");
+    .append('tspan')
+    .text("a primary source of")
+    .attr('x',leftTooltipBox)
+    .attr('dy','10')
 
+    .append('tspan')
+    .text("fuel since 1750. It's")
+    .attr('x',leftTooltipBox)
+    .attr('dy','10')
 
+    .append('tspan')
+    .text("still used to date")
+    .attr('x',leftTooltipBox)
+    .attr('dy','10')
+
+    .append('tspan')
+    .text("for power generation.")
+    .attr('x',leftTooltipBox)
+    .attr('dy','10') 
 }
