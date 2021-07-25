@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<script src="https://d3js.org/d3.v4.js"></script>
+
+<style>
+
+</style>
+
+
+<html lang = "en">
+<body>
+    <p>Leading causes of death</p>
+
+    <svg></svg>
+    <div id = "tooltip"></div>
+
+    <script>
+        var width = 600, height = 300
+
+        var p = d3.csv("./Data/annual-number-of-deaths-by-cause.csv", function(data)
+        {
+            DrawChart(data);
+            
+        });
+
+
+        async function DrawChart(data)
+        {
+            var csvColumns = data.columns;
+            
+            for(i=0;i<data.length-1;i++)
+            {
+                var csvValues = [];
+                var currentYear = parseInt(data[i]["Year"]);
+
+                if(currentYear != 2000) continue;
+
+                csvValues.push(parseInt(data[i]["Respiratory infections"]))
+                csvValues.push(parseInt(data[i]["Terrorism"]))
+                csvValues.push(parseInt(data[i]["Cardiovascular diseases"]))
+                csvValues.push(parseInt(data[i]["Alzheimer"]))
+                csvValues.push(parseInt(data[i]["Chronic kidney"]))
+                csvValues.push(parseInt(data[i]["Chronic respiratory"]))
+                csvValues.push(parseInt(data[i]["Digestive diseases"]))
+                csvValues.push(parseInt(data[i]["Hepatitis"]))
+                csvValues.push(parseInt(data[i]["Parkinson disease"]))
+                csvValues.push(parseInt(data[i]["Fire"]))
+                csvValues.push(parseInt(data[i]["Malaria"]))
+                csvValues.push(parseInt(data[i]["Drowning "]))
+                csvValues.push(parseInt(data[i]["violence"]))
+                csvValues.push(parseInt(data[i]["HIV/AIDS"]))
+                csvValues.push(parseInt(data[i]["Drug use"]))
+                csvValues.push(parseInt(data[i]["Tuberculosis"]))
+                csvValues.push(parseInt(data[i]["Road injuries"]))
+                csvValues.push(parseInt(data[i]["Alcohol use"]))
+                csvValues.push(parseInt(data[i]["Diarrheal diseases"]))
+                csvValues.push(parseInt(data[i]["Nutritional deficiencies"]))
+                csvValues.push(parseInt(data[i]["Suicide"]))
+                csvValues.push(parseInt(data[i]["Diabetes mellitus"]))
+                
+                var domainStart = parseInt(d3.min(csvValues))
+                var domainEnd = parseInt(d3.max(csvValues))
+
+                var y = d3.scaleLinear().domain([domainStart,domainEnd]).range([height,0]);
+                var x = d3.scaleLinear().domain([0,22]).range([0,width]);
+
+                
+                d3.select('svg')
+                .attr('width',width)
+                .attr('height',height)
+                .selectAll('rect')
+                .data(csvValues)
+                .enter().append("rect")
+                .attr('width',19)
+                .attr('x',function(d,i) {return x(i) + 10;})
+                .attr('y', function(d) {return y(height);})
+                .attr('height', function(d) {return 0;})
+                .transition()
+                .duration(2000)
+                .attr('y', function(d) {return y(d);})
+                .attr('height', function(d) {return height - y(d);})
+                
+                console.log(currentYear)
+                console.log(csvValues)
+            }
+        }
+
+
+
+
+    </script>
+</body>
+
+</html>
