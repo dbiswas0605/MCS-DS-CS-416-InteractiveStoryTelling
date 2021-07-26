@@ -14,28 +14,27 @@
     <div id = "tooltip"></div>
 
     <script>
-        var width = 600, height = 300
+        var margin = {top:15, left:150, right:50, botton:30};
+        var width = 600 - margin.left - margin.right;
+        var height = 500 - margin.top - margin.botton;
 
-        var p = d3.csv("./Data/annual-number-of-deaths-by-cause.csv", function(data)
+        d3.csv("./Data/annual-number-of-deaths-by-cause.csv", function(data)
         {
-            DrawChart(data);
-            
+            DrawChart(data, 2016);
         });
 
-
-        async function DrawChart(data)
+        async function DrawChart(data, currentYearParam)
         {
             var csvColumns = data.columns;
-            
+
             for(i=0;i<data.length-1;i++)
             {
                 var csvValues = [];
                 var currentYear = parseInt(data[i]["Year"]);
 
-                if(currentYear != 2000) continue;
+                if(currentYear != currentYearParam) continue;
 
                 csvValues.push(parseInt(data[i]["Respiratory infections"]))
-                csvValues.push(parseInt(data[i]["Terrorism"]))
                 csvValues.push(parseInt(data[i]["Cardiovascular diseases"]))
                 csvValues.push(parseInt(data[i]["Alzheimer"]))
                 csvValues.push(parseInt(data[i]["Chronic kidney"]))
@@ -48,7 +47,6 @@
                 csvValues.push(parseInt(data[i]["Drowning "]))
                 csvValues.push(parseInt(data[i]["violence"]))
                 csvValues.push(parseInt(data[i]["HIV/AIDS"]))
-                csvValues.push(parseInt(data[i]["Drug use"]))
                 csvValues.push(parseInt(data[i]["Tuberculosis"]))
                 csvValues.push(parseInt(data[i]["Road injuries"]))
                 csvValues.push(parseInt(data[i]["Alcohol use"]))
@@ -60,33 +58,58 @@
                 var domainStart = parseInt(d3.min(csvValues))
                 var domainEnd = parseInt(d3.max(csvValues))
 
-                var y = d3.scaleLinear().domain([domainStart,domainEnd]).range([height,0]);
-                var x = d3.scaleLinear().domain([0,22]).range([0,width]);
+                var x = d3.scaleLog().domain([domainStart,domainEnd]).range([0,width]);
+                var y = d3.scaleLinear().domain([0,20]).range([0,20]);                
+                var yColor = d3.scaleLinear().domain([0,20]).range(['red','orange']); 
 
+                // Add X axis
+                var xaxis = d3.scaleLog().domain([domainStart,domainEnd]).range([0, width]);
+                // Add Y axis
+                var yaxis = d3.scaleBand().domain(csvColumns).range([ 0, height]);
+                var cols = csvColumns.splice(0,2);
+
+                var barHeight = 17;
+                var barSpacing = 5;
                 
-                d3.select('svg')
-                .attr('width',width)
-                .attr('height',height)
-                .selectAll('rect')
+                var svg =   d3.select('svg')
+                            .attr('width', width + margin.left + margin.right)
+                            .attr('height', height + margin.top + margin.botton)
+                            .append('g')
+                            .attr("transform","translate(" + margin.left + "," + margin.top + ")");
+
+                svg.selectAll('rect')
                 .data(csvValues)
                 .enter().append("rect")
-                .attr('width',19)
-                .attr('x',function(d,i) {return x(i) + 10;})
-                .attr('y', function(d) {return y(height);})
-                .attr('height', function(d) {return 0;})
-                .transition()
-                .duration(2000)
-                .attr('y', function(d) {return y(d);})
-                .attr('height', function(d) {return height - y(d);})
+                .attr('x', 0)
+                .attr('y', function(d,i) {return y(i)* (barHeight + 5) + barSpacing})
+                .attr('width', function(d) {return x(d);})
+                .attr('height', barHeight)
+                .style('fill', function(d,i) {return yColor(i)})
+
+                svg.selectAll('text')
+                .data(csvValues)
+                .enter()
+                .append('text')
+                .attr('x',function(d) {return x(d);})
+                .attr('y',function(d,i) { return y(i)* (barHeight + 6) + barSpacing})
+                .style('font-size' , '10')
+                .text(function(d) { return d})
+
+
+                /*
+                svg.append("g")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(xaxis));
+                */
+
                 
+                svg.append("g")
+                .call(d3.axisLeft(yaxis));
+
                 console.log(currentYear)
                 console.log(csvValues)
             }
         }
-
-
-
-
     </script>
 </body>
 
