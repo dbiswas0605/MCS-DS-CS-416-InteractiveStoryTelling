@@ -1,16 +1,29 @@
 <!DOCTYPE html>
 <script src="https://d3js.org/d3.v4.js"></script>
-
-<style>
-
-</style>
-
+<script src ="./Javascripts/dropdown.js"></script>
+<link rel="stylesheet" href="./CSS/dropdown.css">
 
 <html lang = "en">
 <body>
     <p>Leading causes of death</p>
-
-    <svg></svg>
+    <table>
+        <tr>
+            <td align="top">
+                <div class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn">Select Year</button>
+                    <div id="myDropdown" class="dropdown-content">
+                      <a href="#">Link 1</a>
+                      <a href="#">Link 2</a>
+                      <a href="#">Link 3</a>
+                    </div>
+                </div>
+            </td>
+            <td>
+                <svg></svg>
+            </td>
+        </tr>
+    </table>
+      
     <div id = "tooltip"></div>
 
     <script>
@@ -20,14 +33,14 @@
 
         d3.csv("./Data/annual-number-of-deaths-by-cause.csv", function(data)
         {
-            DrawChart(data, 2016);
+            DrawChart(data, 2000);
         });
 
         async function DrawChart(data, currentYearParam)
         {
             var csvColumns = data.columns;
 
-            for(i=0;i<data.length-1;i++)
+            for(i=0;i<data.length;i++)
             {
                 var csvValues = [];
                 var currentYear = parseInt(data[i]["Year"]);
