@@ -4,10 +4,69 @@
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-<script src="./JavaScripts/index.js"></script>
+<script src="./JavaScripts/CausesOfPollution.js"></script>
 <script src="./JavaScripts/Annotation.js"></script>
 <script src="./JavaScripts/ShowHideLine.js"></script>
+<style>
 
+    body {
+        font: 14px Arial,sans-serif; 
+        margin: 0px;
+    }
+    .header {
+        padding: 10px 20px;
+        background: #acb3b9; 
+    }
+    .header h1 {
+        font-size: 24px;
+    }
+    .container {
+        width: 100%;
+        background: #f2f2f2; 
+    }
+    .nav, .section {
+        float: left; 
+        padding: 20px;
+        min-height: 170px;
+        box-sizing: border-box;
+    }
+    .nav {            
+        width: 20%;             
+        background: #d4d7dc;
+    }
+    .section {
+        width: 80%;
+    }
+    .nav ul {
+        list-style: none; 
+        line-height: 24px;
+        padding: 0px; 
+    }
+    .nav ul li a {
+        color: #333;
+    }    
+    .clearfix:after {
+        content: ".";
+        display: block;
+        height: 0;
+        clear: both;
+        visibility: hidden;
+    }
+    .footer {
+        background: #acb3b9;            
+        text-align: center;
+        padding: 5px;
+    }
+
+
+.fixedDiv {
+    position: absolute;
+    padding: 4px;
+    border: 1px solid gray;	
+    border-radius: 4px;
+    background-color: lightblue;
+}
+</style>
 
 <html lang="en">
 
@@ -105,30 +164,16 @@
 <body onload='CreateMainChart()'>
     <div class="container">
         <div class="header">
-            <h1>A Study On Economic, Psychological and Social cost of Air pollution.</h1>
+            <h1><b>A Study On Health, Economic, Psychological and Social cost of Air pollution.</b></h1>
         </div>
         <div class="wrapper clearfix">
             <div class="nav">
                 <ul>
-                    <li><a href="index.html">1. How Healthy are we?</a></li>
-                    <li><a href="CausesOfDeath2.html">2. Major Causes of Pollution?</a></li>
+                    <li><a href="CausesOfDeath_Page1.html">1. How Healthy are we?</a></li>
+                    <li><a href="CausesOfPollution_Page2.html"><b>2. Major Causes of Pollution?</b></a></li>
                     <li><a href="#">3. Where are we going?</a></li>
-                    <li><a href="#"><b>4. The Trend. Can we do it?</b></a></li>
+                    <li><a href="CurrentTrend_Page4.html">4. The Trend. Can we do it?</a></li>
                 </ul>
-            </div>
-            <div id="my_title">
-                    Air pollution is the release of gases and small fragments of human-made particles and chemicals into
-                    the air,
-                    the concentration of which is harmful to all living and breathing creatures on this planet.
-                    Upon studying global warming, researchers have determined that air pollution is a significant
-                    contributor to this problem.
-                    The opaqueness of air-polluting particles in the atmosphere traps the sun rays in and prevents the
-                    Earth from cooling off naturally.
-                    At the same time, other air pollutants are destroying the outer atmospheric layer,
-                    primarily the ozone layer (which prevents too much sunlight from entering).
-                    Major changes in weather patterns have been recorded around the world, from unexpected monsoons to
-                    expanding deserts,
-                    caused by primary and secondary air pollutants contributing to climate change
             </div>
             <div class="section">
                 <div id="my_buttons">
@@ -144,19 +189,39 @@
                         onclick="showhide(this)">Cement</button>
                     <button id="otherbutton" class="w3-button w3-magenta w3-border w3-border-magenta w3-round-large"
                         onclick="showhide(this)">Other</button>
-                </div>
-                <div id="my_dataviz" style="border:solid 2px gray;"></div>
+                </div>           
+                <Table>
+                    <tr>
+                        <td><div id="my_dataviz"></div></td>
+                        <td style="vertical-align:top"> 
+                            <div id = "narration"> 
+                                <p>
+                                    Air pollution is the release of gases and small fragments of human-made particles and chemicals into
+                                    the air, the concentration of which is harmful to all living and breathing creatures on this planet.
+                                    Upon studying global warming, researchers have determined that air pollution is a significant
+                                    contributor to this problem.
+                                </p>
 
+                                <p>
+                                    How have global emissions of carbon dioxide (CO2) changed over time?
+                                    In this chart we see the growth of global emissions from the mid-18th century through to today.
+                                    We see that prior to the Industrial Revolution, emissions were very low. Growth in emissions was still relatively slow until the mid-20th century. In 1950 the world emitted 6 billion tonnes of CO2.
+                                    By 1990 this had almost quadrupled to 22 billion tonnes. Emissions have continued to grow rapidly; we now emit over 36 billion tonnes each year.
+
+                                    Emissions growth has slowed over the last few years, but they have yet to reach their peak.
+                                </p>
+
+
+                            </div>
+                        </td>
+                    </tr>
+                </Table>            
             </div>
         </div>
         <div class="footer">
             <p>Author : Debabrata Biswas | dbiswas3@illinois.edu | MCS-DS</p>
         </div>
     </div>
-
-
-
-
 </body>
 
 </html>

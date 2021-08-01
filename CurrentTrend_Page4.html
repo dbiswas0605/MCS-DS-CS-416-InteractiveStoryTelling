@@ -4,6 +4,7 @@
 <!-- Load d3.js -->
 <script src="https://d3js.org/d3.v4.js"></script>
 <script src ="./Javascripts/CurrentTrend.js"></script>
+<link rel="stylesheet" href="https://gispub.epa.gov/air/trendsreport/2021/dist/css/etrends.min.css">
 <style>
 
   body {
@@ -70,19 +71,45 @@
 <body>
     <div class="container">
         <div class="header">
-            <h1>A Study On Economic, Psychological and Social cost of Air pollution.</h1>
+            <h1>A Study On Health, Economic, Psychological and Social cost of Air pollution.</h1>
         </div>
         <div class="wrapper clearfix">
             <div class="nav">
                 <ul>
-                    <li><a href="index.html">1. How Healthy are we?</a></li>
-                    <li><a href="CausesOfDeath2.html">2. Major Causes of Pollution?</a></li>
+                    <li><a href="CausesOfDeath_Page1.html">1. How Healthy are we?</a></li>
+                    <li><a href="CausesOfPollution_Page2.html">2. Major Causes of Pollution?</a></li>
                     <li><a href="#">3. Where are we going?</a></li>
-                    <li><a href="#"><b>4. The Trend. Can we do it?</b></a></li>
+                    <li><a href="CurrentTrend_Page4.html"><b>4. The Trend. Can we do it?</b></a></li>
                 </ul>
             </div>
             <div class="section">
-                <div id="my_dataviz"></div>
+                A DECREASING TREND <a href = "https://www.epa.gov/air-trends/air-quality-national-summary">SUMMARY</a> BELOW.
+                <Table>
+                    <tr>
+                        <td><div id="my_dataviz"></div></td>
+                        <td style="vertical-align:top"> 
+                            <div id = "narration"> 
+                                <p>
+                                    Since 1970, implementation of the Clean Air Act and technological advances from American innovators have dramatically improved air quality in the U.S. Since that time, the combined emissions of criteria and precursor pollutants have dropped by 78%. Cleaner air provides important public health benefits, and we commend our state, local, and industry partners for helping further long-term improvement in our air quality
+                                </p>
+                                <p>
+                                    Air Quality <a href = "https://gispub.epa.gov/air/trendsreport/2021/#home">Trends</a> Show Clean Air Progress
+                                </p>
+                                <p>
+                                    <ul>
+                                        <li>Carbon Monoxide (CO) 8-Hour, <i class="icon icon-arrow-down" aria-hidden="true" title="Down"></i> 73%</li>
+                                        <li>Lead (Pb) 3-Month Average, <i class="icon icon-arrow-down" aria-hidden="true" title="Down"></i> 86% <small>(from 2010)</small></li>
+                                        <li>Nitrogen Dioxide (NO<sub>2</sub>) 1-Hour, <i class="icon icon-arrow-down" aria-hidden="true" title="Down"></i> 54%</li> 
+                                        <li>Ozone (O<sub>3</sub>) 8-Hour, <i class="icon icon-arrow-down" aria-hidden="true" title="Down"></i> 25%</li> 
+                                        <li>Particulate Matter 10 microns (PM<sub>10</sub>) 24-Hour, <i class="icon icon-arrow-down" aria-hidden="true" title="Down"></i> 26%</li> 
+                                        <li>Particulate Matter 2.5 microns (PM<sub>2.5</sub>) Annual, <i class="icon icon-arrow-down" aria-hidden="true" title="Down"></i> 41% <small>(from 2000)</small></li> 
+                                        <li>Sulfur Dioxide (SO<sub>2</sub>) 1-Hour, <i class="icon icon-arrow-down" aria-hidden="true" title="Down"></i> 91%</li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </td>
+                    </tr>
+                </Table>
             </div>
         </div>
         <div class="footer">

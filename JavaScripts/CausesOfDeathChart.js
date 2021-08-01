@@ -109,6 +109,21 @@ function DrawChart(data)
 
             GlowDot();
 
+            svg.append('text')
+            .style('font-size' , '15')
+            .style('visibility', 'visible')
+            .attr('x',margin.left + 10)
+            .attr('y', height + 20)
+            .text("Global death count")
+
+            svg.append('text')
+            .style('font-size' , '15')
+            .style('visibility', 'visible')
+            .attr('x',120)
+            .attr('y', 120)
+            .text("Causes of Death")
+            .attr('transform', 'rotate(90)')
+
 }
 
 

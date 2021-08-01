@@ -215,7 +215,28 @@ function CreateMainChart() {
                     .x(function (d) { if (OtherEmissionStart.date == d.date) d3.select('#my_cirOther').transition().duration(2000).attr('cx', x(d.date)).attr('cy', height - y(d.value)); return x(d.date) })
                     .y(function (d) { return y(d.value) })
                 )
-        });
+        
+        
+        
+                svg.append('text')
+                .style('font-size' , '15')
+                .style('visibility', 'visible')
+                .attr('x',margin.left + 10)
+                .attr('y', height + 45)
+                .text("Time Through History in Year")
+    
+                svg.append('text')
+                .style('font-size' , '15')
+                .style('visibility', 'visible')
+                .attr('x',80)
+                .attr('y', 80)
+                .text("Tonnes")
+                .attr('transform', 'rotate(90)')        
+        
+        
+        
+        
+            });
 
     DrawCoalToolTip(260, 10);
     DrawOilToolTip(260, 40);

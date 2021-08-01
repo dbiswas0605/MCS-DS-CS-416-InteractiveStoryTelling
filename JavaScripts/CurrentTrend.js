@@ -1,7 +1,7 @@
 function CreateTrendChart() {
 
     // set the dimensions and margins of the graph
-    var margin = { top: 10, right: 60, bottom: 30, left: 60 },
+    var margin = { top: 10, right: 60, bottom: 60, left: 60 },
         width = 600 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
 
@@ -191,6 +191,26 @@ function CreateTrendChart() {
 
         d3.selectAll('rect').on('mouseover', function () { GrowRect(this); })
         d3.selectAll('rect').on('mouseout', function () { ResetRect(this); })
+
+
+
+
+        svg.append('text')
+        .style('font-size' , '15')
+        .style('visibility', 'visible')
+        .attr('x', 150)
+        .attr('y', height + 50)
+        .text("Year")
+
+        svg.append('text')
+        .style('font-size' , '15')
+        .style('visibility', 'visible')
+        .attr('x',70)
+        .attr('y', 35)
+        .text("Decrease in %")
+        .attr('transform', 'rotate(90)')
+
+
 
 
     })
