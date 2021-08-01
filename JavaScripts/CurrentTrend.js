@@ -192,9 +192,6 @@ function CreateTrendChart() {
         d3.selectAll('rect').on('mouseover', function () { GrowRect(this); })
         d3.selectAll('rect').on('mouseout', function () { ResetRect(this); })
 
-
-
-
         svg.append('text')
         .style('font-size' , '15')
         .style('visibility', 'visible')
@@ -209,9 +206,6 @@ function CreateTrendChart() {
         .attr('y', 35)
         .text("Decrease in %")
         .attr('transform', 'rotate(90)')
-
-
-
 
     })
 
