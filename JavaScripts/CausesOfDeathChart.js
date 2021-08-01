@@ -1,4 +1,4 @@
-function DrawChart(data, currentYearParam)
+function DrawChart(data)
 {
     var margin = {top:15, left:150, right:50, botton:30};
     var width = 600 - margin.left - margin.right;
@@ -17,8 +17,7 @@ function DrawChart(data, currentYearParam)
             .attr('height', height + margin.top + margin.botton)
             .style('background-color', '#D3D3D3')
             .append("g")
-            .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 
         // X axis
@@ -30,15 +29,10 @@ function DrawChart(data, currentYearParam)
             .attr("transform", "translate(0," + height + ")")
             .call(d3.axisBottom(x).tickFormat((d) => '').tickSize(0))
 
-           
-
-
         // Y axis
         var yaxis = d3.scaleBand()
         .domain(causes)    
         .range([ 0, height ])
-            
-            //.padding(.1);
 
 
         svg.append("g")
@@ -47,8 +41,6 @@ function DrawChart(data, currentYearParam)
             var y = d3.scaleLinear()
             .domain([0, 20])
             .range([ 0, height ])
-            
-            //.padding(.1);
 
             var yColor = d3.scaleLinear().domain([0,20]).range(['red','blue']); 
         //Bars
@@ -63,9 +55,8 @@ function DrawChart(data, currentYearParam)
             .style('fill', function(d,i) {return yColor(i)})
 
         
-            d3.select('svg').append("g").attr('id','highlight')
-            .attr("transform",
-            "translate(" + margin.left + "," + margin.top - 10 + ")")
+            d3.select('svg')//.append("g").attr('id','highlight')
+            //.attr("transform","translate(" + margin.left + "," + margin.top + ")")
             .append('rect')
             .attr('x',margin.left - 130)
             .attr('y',margin.top-10)
@@ -74,7 +65,7 @@ function DrawChart(data, currentYearParam)
             .style('opacity', 0.5)
             .style('fill', 'orange')
             .transition()
-            .duration(2000)
+            .duration(4000)
             .style('fill', 'red')
 
 
@@ -82,8 +73,7 @@ function DrawChart(data, currentYearParam)
 
             var valueText = d3.select('g')
             .append("g").attr('id','valuetext')
-            .attr("transform",
-            "translate(" + margin.left + "," + margin.top + ")");
+            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
      
             valueText.selectAll('text')
             .data(causeData)
@@ -96,9 +86,28 @@ function DrawChart(data, currentYearParam)
             .text(function(d) {return d})
 
 
+            svg.append('circle')
+            .attr('id','my_cir')
+            .attr('cx', 300)
+            .attr('cy', 90)
+            .attr('r',20)
+            .style('fill','none')
+            .style('stroke-width','1')
+            .on('mouseover', function() { d3.select('#causeofdeathtooltip').transition().duration(700).style('opacity',1)})
+            .on('mouseout', function() {d3.select('#causeofdeathtooltip').transition().duration(700).style('opacity',0)})
 
 
+            svg.append('circle')
+            .attr('id','my_cir2')
+            .attr('cx', 300)
+            .attr('cy', 90)
+            .attr('r',10)
+            .style('fill','#5d1818')
+            .style('stroke-width','1')
+            .on('mouseover', function() {d3.select('#causeofdeathtooltip').transition().duration(700).style('opacity',1)})
+            .on('mouseout', function() {d3.select('#causeofdeathtooltip').transition().duration(700).style('opacity',0)})
 
+            GlowDot();
 
 }
 
@@ -143,7 +152,7 @@ function CausesOfDeathBanner()
     .transition()
     .duration(1000)
     .html("world");
-*/
+
 
     d3.select("body")
 	.append("div")
@@ -157,18 +166,34 @@ function CausesOfDeathBanner()
     .text("Message 1")
     .style("background-color","red")
     .style("font-size","20px")
+*/
 
     d3.select("body")
-	.append("div")
-    .style("top", 300 + "px")
-	.style("left", 400 + "px")
+    .append("div")
+    .attr('id', 'causeofdeathtooltip')
+    .style("top", 280 + "px")
+	.style("left", 750 + "px")
+    .style('opacity',0)
 	.attr("class", "fixedDiv")
-	.html("How is pollution affecting us?")
-    .append('p')
-    .transition()
-    .duration(2500)
-    .text("Message 1")
-    .style("background-color","red")
-    .style("font-size","20px")
-
+    .html("<p>Air pollution is the leading cause of death in developing countries</p><img src='./images/april_ambient_air_pollution.jpg'></img>");
 }
+
+function HiglightPoint(){
+
+    d3.select("#my_cir")
+  
+      // First, make the bar wider
+      .transition()
+      .duration(1000)
+      .attr("r", "15")
+      .style("fill", "orange")
+  
+      .transition()
+      .duration(1000)
+      .attr("r", "10")
+      .style("fill", "#5d1818");    
+  }
+  
+  function GlowDot() {
+    setInterval(HiglightPoint, 2500);
+  }
