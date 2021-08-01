@@ -83,7 +83,7 @@ function CreateMainChart() {
     let arrOtherEmission = new Array();
     var OtherEmissionStart = { date: 1972, value: 0 };
 
-    d3.csv("./Data/co2-emissions-by-fuel-line.csv",
+    d3.csv("./data/co2-emissions-by-fuel-line.csv",
         function (consdata) {
             if (consdata["Entity"] == "World") {
                 var dtOil = { date: d3.timeParse("%Y")(consdata.Year), value: consdata['CO2 emissions from oil'] };

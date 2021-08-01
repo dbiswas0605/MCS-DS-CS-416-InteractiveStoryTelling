@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <script src="https://d3js.org/d3.v4.js"></script>
-<script src ="Javascripts/CausesOfDeathChart.js"></script>
-<script src ="Javascripts/dropdown.js"></script>
-<link rel="stylesheet" href="./CSS/dropdown.css">
-<link rel="stylesheet" href="./CSS/NextPrevButton.css">
+<script src ="./javascripts/causesofdeathchart.js"></script>
+<script src ="./Javascripts/dropdown.js"></script>
+<link rel="stylesheet" href="./css/dropdown.css">
+<link rel="stylesheet" href="./css/nextprevbutton.css">
 <style>
 
     body {
@@ -75,10 +75,10 @@
         <div class="wrapper clearfix">
             <div class="nav">
                 <ul>
-                    <li>1.<a href="CausesOfDeath_Page1.html"><b>How Healthy are we?</b></a></li>
-                    <li>2.<a href="CausesOfPollution_Page2.html">Major Causes of Pollution?</a></li>
-                    <li>3.<a href="ImpactOfPollution_Page3.html">Where are we going?</a></li>
-                    <li>4.<a href="CurrentTrend_Page4.html">The Trend. Can we do it?</a></li>
+                    <li>1.<a href="causesofdeath_page1.html"><b>How Healthy are we?</b></a></li>
+                    <li>2.<a href="causesofpollution_page2.html">Major Causes of Pollution?</a></li>
+                    <li>3.<a href="impactofpollution_page3.html">Where are we going?</a></li>
+                    <li>4.<a href="currenttrend_page4.html">The Trend. Can we do it?</a></li>
                 </ul>
             </div>
             <div class="section">
@@ -130,7 +130,7 @@
     <script>
         function init(year)
         {
-            d3.csv("./Data/annual-number-of-deaths-by-cause_2.csv", function(data)
+            d3.csv("./data/annual-number-of-deaths-by-cause_2.csv", function(data)
             {
                 var sortedAndFilteredData = GetYearSorted(data, year);
                 DrawChart(sortedAndFilteredData);

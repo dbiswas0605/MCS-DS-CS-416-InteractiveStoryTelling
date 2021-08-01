@@ -26,7 +26,7 @@ function CreateTrendChart() {
 
 
     //Read the data
-    d3.csv("./Data/CurrentTrenddata.csv", function (data) {
+    d3.csv("./data/currenttrenddata.csv", function (data) {
 
         // group the data: I want to draw one line per group
         var PbData = GetPbData(data);
